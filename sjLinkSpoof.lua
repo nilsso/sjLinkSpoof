@@ -20,20 +20,13 @@ function addon:OnInitialize()
     self:RegisterChatCommand({"/sjLinkSpoof", "/sjls"}, {
         type = "group",
         args = {
-            toggle = {
+            show = {
                 order = 1,
                 name = "Show",
                 desc = "Show sjLinkSpoof main frame",
-                type = "toggle",
-                get = function()
-                    return self.main:IsVisible()
-                end,
-                set = function()
-                    if self.main:IsVisible() then
-                        self.main:Hide()
-                    else
-                        self.main:Show()
-                    end
+                type = "execute",
+                func = function()
+                    self.main:Show()
                 end
             }
         }
@@ -55,6 +48,7 @@ function addon:InitFrames()
     -- Main frame
     f = CreateFrame("Frame", addonName.."_Main", UIParent)
     self.main = f
+    f:Hide()
     f:SetWidth(600)
     f:SetHeight(100)
     f:SetPoint("CENTER", 0, 0)
